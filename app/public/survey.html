@@ -3,8 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Survey</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -19,56 +17,90 @@
         <h3>About You</h3>
         <div class="form-group">
             <label for="">Name (Required)</label>
-            <input type="text" class="form-control" id="" placeholder="Name">
+            <input type="text" class="form-control" id="name" placeholder="Name">
         </div>
 
         <div class="form-group">
             <label for="">Profile picture (Required)</label>
-            <input type="text" class="form-control" id="" placeholder="Profile picture">
+            <input type="text" class="form-control" id="picture" placeholder="Profile picture">
         </div>
 
-        <form>
+        <form action="http://localhost:3000/" method="POST">
+            <!--need action and method to be able to post -->
             <div class="form-group">
                 <label for="">Saying the truth is more important than hurting someone else's feelings</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                    <option disabled ="disabled">Select an Option</option>
-                    <option>1 (Strongly disagree)</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5 (Strongly agree)</option>
+                <select class="form-control" id="question1">
+                    <option disabled="disabled">Select an Option</option>
+                    <option value="1">1 (Strongly disagree)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (Strongly agree)</option>
                 </select>
             </div>
 
             <div class="form-group">
-                    <label for="">Status power and money are important to you</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option disabled ="disabled">Select an Option</option>
-                        <option>1 (Strongly disagree)</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5 (Strongly agree)</option>
-                    </select>
-                </div>
+                <label for="">Status power and money are important to you</label>
+                <select class="form-control" id="question2">
+                    <option disabled="disabled">Select an Option</option>
+                    <option value="1">1 (Strongly disagree)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (Strongly agree)</option>
+                </select>
 
-                <div class="form-group">
-                        <label for="">You are sensitive to the emotions others are feeling</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option disabled ="disabled">Select an Option</option>
-                            <option>1 (Strongly disagree)</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5 (Strongly agree)</option>
-                        </select>
-                    </div>
+            </div>
 
-            <button type='submit'>submit</button>
+            <div class="form-group">
+
+                <label for="">You are sensitive to the emotions others are feeling</label>
+                <select class="form-control" id="question3">
+                    <option disabled="disabled">Select an Option</option>
+                    <option value="1">1 (Strongly disagree)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (Strongly agree)</option>
+                </select>
+            </div>
+
+            <button type='submit' id="submit">submit</button>
 
         </form>
     </div>
+    <script>
+        $("#submit").on("click", function () {
+            event.preventDefault();
+            var currentUser = {
+                name: $("#name").val().trim(),
+                picture: $("#picture").val().trim(),
+                scores: [
+                    $('#question1').val().trim(),
+                    $('#question2').val().trim(),
+                    $('#question3').val().trim(),
+                    // $('#question4').val().trim(),
+                    // $('#question5').val().trim(),
+                    // $('#question6').val().trim(),
+                    // $('#question7').val().trim(),
+                    // $('#question8').val().trim(),
+                    // $('#question9').val().trim(),
+                    // $('#question10').val().trim()
+                ]
+            }
 
+            // to remove spaces
+            searchedCharacter = searchedCharacter.replace(/\s+/g, "").toLowerCase();
+            
+            //adding user input to the list of possible friends
+            $.post("/api/friends" + currentUser, function (data) {
+                console.log(data);
+            })
+        })
+
+
+
+    </script>
 </body>
 
 </html>
