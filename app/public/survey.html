@@ -72,7 +72,7 @@
     <script>
         $("#submit").on("click", function () {
             event.preventDefault();
-            var currentUser = {
+            var newFriend = {
                 name: $("#name").val().trim(),
                 picture: $("#picture").val().trim(),
                 scores: [
@@ -93,7 +93,7 @@
             searchedCharacter = searchedCharacter.replace(/\s+/g, "").toLowerCase();
             
             //adding user input to the list of possible friends
-            $.post("/api/friends" + currentUser, function (data) {
+            $.post("/api/friends" + newFriend, function (data) {
                 console.log(data);
             })
         })
