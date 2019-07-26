@@ -1,6 +1,3 @@
-//exporting the data from the array
-module.exports = possibleFriends; 
-
 var possibleFriends = [
     {
         name: "Lili",
@@ -31,3 +28,5 @@ var possibleFriends = [
     }
     ]
 
+    //exporting the data from the array
+module.exports = possibleFriends; 
